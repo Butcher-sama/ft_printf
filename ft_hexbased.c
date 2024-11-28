@@ -6,7 +6,7 @@
 /*   By: fkasap <fkasap@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:27:19 by fkasap            #+#    #+#             */
-/*   Updated: 2024/11/22 17:38:54 by fkasap           ###   ########.fr       */
+/*   Updated: 2024/11/25 17:58:02 by fkasap           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,29 @@ int	ft_puthex(unsigned int i, const char c)
 	return (len);
 }
 
+static int	ft_putptr_hex(unsigned long i)
+{
+	int	len;
+
+	len = 0;
+	if (i >= 16)
+	{
+		len += ft_putptr_hex (i / 16);
+		len += ft_putptr_hex (i % 16);
+	}
+	else
+	{
+		if (write(1, &"0123456789abcdef"[i], 1) == -1)
+			return (-1);
+		len++;
+	}
+	return (len);
+}
+
 int	ft_putptr(unsigned long p)
 {
-	int				len;
-	int				tmp1;
-	int				tmp2;
-	unsigned int	high_part;
-	unsigned int	low_part;
+	int	len;
+	int	tmp;
 
 	len = 0;
 	if (p == 0)
@@ -53,14 +69,9 @@ int	ft_putptr(unsigned long p)
 	if (write(1, "0x", 2) == -1)
 		return (-1);
 	len += 2;
-	high_part = (unsigned int)(p >> 32);
-	low_part = (unsigned int)(p & 0xFFFFFFFF);
-	tmp1 = 0;
-	if (high_part != 0)
-		tmp1 = ft_puthex(high_part, 'x');
-	tmp2 = ft_puthex(low_part, 'x');
-	if (tmp1 == -1 || tmp2 == -1)
+	tmp = ft_putptr_hex(p);
+	if (tmp == -1)
 		return (-1);
-	len += tmp1 + tmp2;
+	len += tmp;
 	return (len);
 }

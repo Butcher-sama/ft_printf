@@ -6,7 +6,7 @@
 /*   By: fkasap <fkasap@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:20:01 by fkasap            #+#    #+#             */
-/*   Updated: 2024/11/22 13:22:55 by fkasap           ###   ########.fr       */
+/*   Updated: 2024/11/25 17:53:07 by fkasap           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_putnbr(int i)
 {
-	int len;
-	int nb;
+	int	len;
+	int	nb;
 
 	len = 0;
 	if (i == -2147483648)
